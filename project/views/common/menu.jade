@@ -1,0 +1,46 @@
+
+.sidebar
+  .sidebar-bg
+  i.sidebar-hide
+  h2
+    a(href='javascript:;')
+      i.h2-icon(title='切换到树型结构')
+      span 安全管理
+  ul.nav
+    each item in menuList 
+      if( current == item.name)
+        li.nav-li.current
+          a.ue-clear(href='javascript:;')
+            i.nav-ivon
+            span.nav-text #{item.name} 
+          ul.subnav
+            each data in item.list 
+             if( data.menuName == message )
+              li.subnav-li.current 
+                a.ue-clear(href='#{data.url}')
+                  i.subnav-icon
+                  span.subnav-text #{data.menuName}
+             else 
+              li.subnav-li 
+                a.ue-clear(href='#{data.url}')
+                  i.subnav-icon
+                  span.subnav-text #{data.menuName}
+      else 
+        li.nav-li
+          a.ue-clear(href='javascript:;')
+            i.nav-ivon
+            span.nav-text #{item.name}
+          ul.subnav
+            each data in item.list 
+             if(data.menuName == message)
+              li.subnav-li
+                a.ue-clear(href='#{data.url}')
+                  i.subnav-icon
+                  span.subnav-text #{data.menuName}
+             else 
+               li.subnav-li 
+                a.ue-clear(href='#{data.url}')
+                  i.subnav-icon
+                  span.subnav-text #{data.menuName}          
+  .tree-list.outwindow
+    .tree.ztree

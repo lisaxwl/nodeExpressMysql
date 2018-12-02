@@ -1,0 +1,46 @@
+style(type="text/css"). 
+  #home table{
+    margin: 20px 0;
+  }
+  #home .addDilaog {
+    display:none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color:rgba(0,0,0,0.6);
+    top: 0;
+    left: 0;
+  }
+    
+
+#home
+  .btn-group(role='group', aria-label='...')
+    button.btn.btn-info.add(type='button') 添加
+  .addDilaog
+    .content
+      
+      .dialog-text
+        p.dialog-content 添加商品
+        p.tips  fafd
+        .buttons
+          input.button.long2.ok(type='button', value='确定')
+          input.button.long2.normal(type='button', value='取消')
+  table.table.table-bordered  
+    thead
+      tr
+        th 编号
+        th 商品名
+        th 购买日期
+        th 购买价格
+    tbody
+      each item in result.data
+        tr
+          td #{item.id}
+          td #{item.goodsname}
+          td #{item.buytime}
+          td #{item.buyprice}￥
+  
+script(type='text/javascript').
+  $('.add').click(function(){
+    $('.addDilaog').show()
+  });

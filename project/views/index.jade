@@ -1,0 +1,50 @@
+extends layout
+
+
+block content
+  div#main
+    #container
+      include common/head.jade
+
+      #container
+      #bd
+        include common/menu.jade
+        .main
+          .title
+            i.sidebar-show
+            ul.tab.ue-clear
+              li.current(data-id='1', data-default='default')
+                a.ue-clear(href='javascript:;')
+                  span #{message}
+            i.tab-more(style='display: none;')
+            i.tab-close
+          .content
+          
+           if message=='全部'
+             include home.jade
+           else if message=='上衣内搭' 
+             include sy.jade
+           else if message == '衬衫'
+             div #{message}
+             include user.jade
+                                 
+    .more-bab-list
+      ul
+      .opt-panel-ml
+      .opt-panel-mr
+      .opt-panel-bc
+      .opt-panel-br
+      .opt-panel-bl
+      
+    include common/exitDialog.jade
+    
+   #footer
+   include common/footer.jade
+   script(type="text/javascript" src="/js/core.js")
+   script(type="text/javascript" src="/js/jquery.dialog.js")
+   script(type="text/javascript" src="/js/global.js")
+   script(type="text/javascript" src="/js/Menu.js")
+   script(type="text/javascript" src="/javascripts/index.js")
+   script(type="text/javascript" src="/javascripts/main.js") 
+
+   
