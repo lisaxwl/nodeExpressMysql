@@ -4,8 +4,8 @@ var router = express.Router();
 // var db = require('../config/db');
 
 /* GET users listing. */// 此处访问的地址其实是 localhost:端口号/home/user
-router.get('/users', function(req, res, next) {
-  res.render('index', {message:"users"});
+router.get('/add', function(req, res, next) {
+  res.render('add', {message:"users"});
   // setTimeout(function () {
   //   try {
   //     throw new Error("BROKEN");

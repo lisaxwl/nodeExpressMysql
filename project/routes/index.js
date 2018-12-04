@@ -89,7 +89,7 @@ var menuList = [
 }];
 
 
-router.get('/',function(req,res,next){
+router.get('/',function(req,res,next){ //首页
 	//查
 
 	pool.getConnection(function(err,connection){

@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //配置路由，（'自定义路径'，上面设置的接口地址）
 app.use('/', indexRouter);
-app.use('/home', usersRouter);
+app.use('/action', usersRouter);
 
 // catch 404 and forward to error handler 错误处理
 app.use(function(req, res, next) {

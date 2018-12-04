@@ -2,29 +2,12 @@ style(type="text/css").
   #home table{
     margin: 20px 0;
   }
-  #home .addDilaog {
-    display:none;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color:rgba(0,0,0,0.6);
-    top: 0;
-    left: 0;
-  }
-    
 
+    
 #home
   .btn-group(role='group', aria-label='...')
     button.btn.btn-info.add(type='button') 添加
-  .addDilaog
-    .content
-      
-      .dialog-text
-        p.dialog-content 添加商品
-        p.tips  fafd
-        .buttons
-          input.button.long2.ok(type='button', value='确定')
-          input.button.long2.normal(type='button', value='取消')
+  
   table.table.table-bordered  
     thead
       tr
@@ -42,5 +25,5 @@ style(type="text/css").
   
 script(type='text/javascript').
   $('.add').click(function(){
-    $('.addDilaog').show()
+    location.href='/action/add/'; //跳转到添加页面
   });
