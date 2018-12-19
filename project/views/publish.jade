@@ -1,0 +1,19 @@
+style(type="text/css"). 
+  
+
+#publisherList
+  .publisher_main
+    div.box
+      table.table
+        thead
+          tr
+            th id
+            th 分类名
+            th 操作
+        tbody
+          each item in result
+            tr
+              td #{item.id}
+              td #{item.name}
+              td
+                button.btn.btn-info.add(type='button') 编辑
