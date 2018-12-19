@@ -2,8 +2,13 @@ style(type="text/css").
   #home table{
     margin: 20px 0;
   }
-
-    
+  
+  #home .level_start {
+    width: .8rem;
+    height: .8rem;
+    margin-right: .07rem;
+  }
+  
 #home
   .btn-group(role='group', aria-label='...')
     button.btn.btn-info.add(type='button') 添加
@@ -12,17 +17,28 @@ style(type="text/css").
     thead
       tr
         th 编号
-        th 商品名
-        th 购买日期
-        th 购买价格
+        th 书名
+        th 入库时间
+        th 星级
+        th 作者
+        th 价格
+        th 操作
     tbody
       each item in result.data
         tr
           td #{item.id}
-          td #{item.goodsname}
-          td #{item.buytime}
-          td #{item.buyprice}￥
-  
+          td #{item.bookname}
+          td #{item.entertime}
+          td 
+            -for(var i =0; i<item.level;i++)
+              <img alt src="https://wap.cmread.com/rbc/p/content/repository/ues/image/s109/xqy_redstart.png" class="level_start">
+             <img alt src="https://wap.cmread.com/rbc/p/content/repository/ues/image/s109/xqy_halfredstart.png" class="level_start"> 
+          td #{item.author}
+          td #{item.price}￥
+          td
+            button.btn.btn-info.edit(type='button') 编辑
+            
+
 script(type='text/javascript').
   $('.add').click(function(){
     location.href='/action/add/'; //跳转到添加页面

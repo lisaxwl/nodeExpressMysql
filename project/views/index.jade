@@ -19,14 +19,8 @@ block content
             i.tab-more(style='display: none;')
             i.tab-close
           .content
-          
-           if message=='全部'
-             include home.jade
-           else if message=='上衣内搭' 
-             include sy.jade
-           else if message == '衬衫'
-             div #{message}
-             include user.jade
+            include main.jade
+           
                                  
     .more-bab-list
       ul
