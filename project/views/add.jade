@@ -3,9 +3,9 @@ style(type="text/css").
 
 form.form-horizontal
   .row.form-group
-    label.control-label.col-lg-1(for='name') 书名
+    label.control-label.col-lg-1(for='bookname') 书名
     .col-lg-5.col-md-6
-      input#name.form-control(name='name', type='text')
+      input#bookname.form-control(name='bookname', type='text')
   .row.form-group
     label.control-label.col-lg-1(for='publisher')  出版社
     .col-lg-5.col-md-6
@@ -30,7 +30,7 @@ form.form-horizontal
     .col-lg-5.col-md-6
       input#level.form-control(name='level', type='text')
 
-  button.btn.btn-primary(type='submit', style='margin-left:50px') 保存
+  button.btn.btn-primary.add(type='submit', style='margin-left:50px') 保存
 
 script(type='text/javascript').
   var toggle = false;
@@ -49,4 +49,7 @@ script(type='text/javascript').
     $('.dropdown-toggle').text(pubilser)
     $(".dropdown-menu").hide();
     toggle = false;
+  })
+  $(".add").click(function(){
+  
   })
