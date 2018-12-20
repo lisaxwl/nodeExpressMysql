@@ -139,7 +139,15 @@ router.post("/update",function(req,res,next){
     })
 });
 
-
+/**
+ * 删除
+ */
+router.get("/delete/:id",function(req,res){
+    var id = req.params.id;
+    getData.connect("delete from book where id = " + id,function(result){ 
+      res.redirect("/");
+    })
+});
 
 router.get('/categoryList', function(req, res, next) {//分类列表
     getData.connect(userSQL.queryCategoryAll,function(result){

@@ -41,7 +41,8 @@ style(type="text/css").
           td #{item.author}
           td #{item.price}￥
           td
-            a.btn.btn-info.edit(type='button',href="/toUpdate/#{item.id}") 编辑
+            a.btn.btn-info.btn-xs.edit(type='button',href="/toUpdate/#{item.id}") 编辑
+            a.btn.btn-danger.btn-xs.edit(type='button',href="/delete/#{item.id}") 删除
             
 
 script(type='text/javascript').
