@@ -8,7 +8,10 @@ style(type="text/css").
     height: .8rem;
     margin-right: .07rem;
   }
-  
+  #home .edit{
+    color:white;
+  }
+
 #home
   .btn-group(role='group', aria-label='...')
     button.btn.btn-info.add(type='button') 添加
@@ -18,6 +21,7 @@ style(type="text/css").
       tr
         th 编号
         th 书名
+        th 出版
         th 入库时间
         th 星级
         th 作者
@@ -28,6 +32,7 @@ style(type="text/css").
         tr
           td #{item.id}
           td #{item.bookname}
+          td #{item.publisher}
           td #{item.entertime}
           td 
             -for(var i =0; i<item.level;i++)
@@ -36,7 +41,7 @@ style(type="text/css").
           td #{item.author}
           td #{item.price}￥
           td
-            button.btn.btn-info.edit(type='button') 编辑
+            a.btn.btn-info.edit(type='button',href="/toUpdate/#{item.id}") 编辑
             
 
 script(type='text/javascript').

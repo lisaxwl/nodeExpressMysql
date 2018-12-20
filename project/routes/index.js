@@ -89,6 +89,58 @@ router.post("/add",function(req,res,next){
 // INSERT INTO book(bookname,entertime,publisher,price,author,level) VALUES('发发呆','0235001','2018/12/20','出版',56,'作者',4)
 
 
+/**
+ * 修改
+ */
+router.get("/toUpdate/:id",function(req,res,next){
+    var id = req.params.id;
+    var sql = "select * from book where id = " + id;
+    var publishList;
+    //查询出版列表
+    getData.connect(userSQL.queryPublisherList,function(result){ 
+      publishList = result;
+    })
+    console.log(JSON.stringify(publishList))
+
+    getData.connect(sql,function(result){ 
+      console.log(JSON.stringify(result)+sql);
+        res.render('index', {current:menuData.menu[0].name,message:"图书修改",
+            menuList:menuData.menu,
+            result:result,
+            pubList:publishList
+        });
+    })
+});
+
+router.post("/update",function(req,res,next){
+    var id = req.body.id;
+    var bookname = req.body.bookname;
+    var price = req.body.price;
+    var author = req.body.author;
+    var level = req.body.level;
+    var publisher = req.body.publisher;
+    var sql = "update book set bookname = '"+ bookname +"',price = '"+ price +"',author = '"+ author+"',publisher = '"+ publisher+"',level = '"+ level +"' where id = " + id;
+    console.log(sql);
+    pool.getConnection(function(err,connection){
+      if(err) {
+          console.log('MySQL数据库建立连接失败。');
+          throw err;
+      }else {
+        connection.query(sql,function (err, result) {
+          if(err){
+              res.send("修改失败 " + err);
+          }else {
+              res.redirect("/");
+          }
+        })
+        connection.release();
+      }
+      
+    })
+});
+
+
+
 router.get('/categoryList', function(req, res, next) {//分类列表
     getData.connect(userSQL.queryCategoryAll,function(result){
         res.render('index', {current:menuData.menu[0].name,
