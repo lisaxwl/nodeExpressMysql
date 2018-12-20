@@ -13,7 +13,7 @@ style(type="text/css").
   .btn-group(role='group', aria-label='...')
     button.btn.btn-info.add(type='button') 添加
   
-  table.table.table-bordered  
+  table.table.table-striped  
     thead
       tr
         th 编号
@@ -24,7 +24,7 @@ style(type="text/css").
         th 价格
         th 操作
     tbody
-      each item in result.data
+      each item in result
         tr
           td #{item.id}
           td #{item.bookname}

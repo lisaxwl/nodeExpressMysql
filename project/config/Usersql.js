@@ -1,5 +1,5 @@
 var UserSQL = {  
-    insert:'INSERT INTO User(uid,userName) VALUES(?,?)', 
+    insert:'INSERT INTO book(uid,userName) VALUES(?,?)', 
     queryAll:'SELECT * FROM book',  
     getUserById:'SELECT * FROM goods WHERE uid = ? ',
     queryCategoryAll: 'SELECT * FROM bookcategory',

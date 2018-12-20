@@ -19,7 +19,7 @@ module.exports ={
 
       })
     },
-    "toast":function(str){
-        console.log("toast方法"+str);
+    "add":function(str){
+        
     }
 }

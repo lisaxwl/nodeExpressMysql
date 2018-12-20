@@ -1,11 +1,12 @@
 style(type="text/css"). 
   .form-control { padding:0;}
 
-form.form-horizontal
+form.form-horizontal(action="/add" method="post" id="forms")
+
   .row.form-group
     label.control-label.col-lg-1(for='bookname') 书名
     .col-lg-5.col-md-6
-      input#bookname.form-control(name='bookname', type='text')
+      input#bookname.form-control(name='bookname', type='text',value='')
   .row.form-group
     label.control-label.col-lg-1(for='publisher')  出版社
     .col-lg-5.col-md-6
@@ -20,16 +21,17 @@ form.form-horizontal
   .row.form-group
     label.control-label.col-lg-1(for='price')  价格
     .col-lg-5.col-md-6
-      input#price.form-control(name='price', type='text')
+      input#price.form-control(name='price', type='text',value='')
   .row.form-group
     label.control-label.col-lg-1(for='author')  作者
     .col-lg-5.col-md-6
-      input#author.form-control(name='author', type='text')
+      input#author.form-control(name='author', type='text',value='')
   .row.form-group
     label.control-label.col-lg-1(for='level')  星级
     .col-lg-5.col-md-6
-      input#level.form-control(name='level', type='text')
-
+      input#level.form-control(name='level', type='text',value='')
+  .row
+    input#publisher(value='#{result[0].name}',name='publisher',type="hidden")
   button.btn.btn-primary.add(type='submit', style='margin-left:50px') 保存
 
 script(type='text/javascript').
@@ -46,10 +48,8 @@ script(type='text/javascript').
   $(".dropdown-menu li").click(function(){
     var pubilser = $(this).text();
     $('.dropdown-toggle').val(pubilser);
-    $('.dropdown-toggle').text(pubilser)
+    $('.dropdown-toggle').text(pubilser);
+    $('#publisher').val(pubilser);
     $(".dropdown-menu").hide();
     toggle = false;
-  })
-  $(".add").click(function(){
-  
   })
