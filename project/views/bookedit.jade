@@ -31,7 +31,7 @@ form.form-horizontal(action="/update" method="post" id="forms")
     .col-lg-5.col-md-6
       input#level.form-control(name='level', type='text',value='#{result[0].level}')
   .row
-    input#publisher(value='#{result[0].name}',name='publisher',type="hidden")
+    input#publisher(value='#{result[0].publisher}',name='publisher',type="hidden")
     input#publisher(value='#{result[0].id}',name='id',type="hidden")
   button.btn.btn-primary.add(type='submit', style='margin-left:50px') 保存
 

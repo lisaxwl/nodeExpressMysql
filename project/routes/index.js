@@ -8,12 +8,12 @@ var db = require('../config/db');
 var userSQL = require('../config/Usersql');
 
 var menuData = require('../config/menuList');
-var getData = require('../config/getData');
+var getData = require('../config/query');
 
 
 // 使用bd.js的配置信息创建一个MySQL连接池
 var pool = mysql.createPool(db.mysql);
-
+var connection = mysql.createConnection(db.mysql)
 //执行创建连接
 // connection.connect();
 
@@ -29,17 +29,21 @@ var responseJSON = function (res,ret) {
 
 router.get('/',function(req,res,next){ //首页
   //查
-  var list;
-  getData.connect(userSQL.queryAll,function(result){
-      console.log(JSON.stringify(result)+"=====")
-      var arryList=[];
-      result.forEach(function(item){
+  var list={};
+
+  getData.query(userSQL.queryAll,function(err,rows){
+    if(err){
+      res.render('index', {current:menuData.menu[0].name,message:"全部",result: [],menuList:menuData.menu});
+    }else {
+      rows.forEach(function(item){
           item['entertime'] = moment(item.entertime).format('YYYY-MM-DD HH:mm:ss');
       })
+      res.render('index', {current:menuData.menu[0].name,message:"全部",result: rows,menuList:menuData.menu})
+    }
+      
       
       // 以json形式，把操作结果返回给前台页面 
       // responseJSON(res,list);
-      res.render('index', {current:menuData.menu[0].name,message:"全部",result: result,menuList:menuData.menu})
       
       // 释放连接
       // connection.release();
@@ -51,11 +55,10 @@ router.get('/',function(req,res,next){ //首页
 
       // end当一个连接池不再需要使用时，用连接池对象的end方法关闭连接池。pool.end();
   });
-  
 });
 
 router.get('/addBook', function(req, res, next) {
-    getData.connect(userSQL.queryPublisherList,function(result){ 
+    getData.query(userSQL.queryPublisherList,function(err,result){ 
         res.render('index', {current:menuData.menu[0].name,message:"图书录入",
             menuList:menuData.menu,
             result:result
@@ -70,7 +73,7 @@ router.post("/add",function(req,res,next){
     var price = req.body.price;
     var level = req.body.level;
     var entertime = moment().format('YYYY-MM-DD HH:mm:ss');
-
+    
     pool.getConnection(function(err,connection){
         if(err) {
             console.log('MySQL数据库建立连接失败。');
@@ -95,20 +98,20 @@ router.post("/add",function(req,res,next){
 router.get("/toUpdate/:id",function(req,res,next){
     var id = req.params.id;
     var sql = "select * from book where id = " + id;
-    var publishList;
     //查询出版列表
-    getData.connect(userSQL.queryPublisherList,function(result){ 
-      publishList = result;
-    })
-    console.log(JSON.stringify(publishList))
+    getData.query(userSQL.queryPublisherList,function(err,rows){ 
+      if(err){
 
-    getData.connect(sql,function(result){ 
-      console.log(JSON.stringify(result)+sql);
-        res.render('index', {current:menuData.menu[0].name,message:"图书修改",
-            menuList:menuData.menu,
-            result:result,
-            pubList:publishList
-        });
+      }else {
+        getData.query(sql,function(err,result){ 
+          console.log(JSON.stringify(result)+sql);
+            res.render('index', {current:menuData.menu[0].name,message:"图书修改",
+              menuList:menuData.menu,
+              result:result,
+              pubList:rows
+            });
+        })
+      }
     })
 });
 
@@ -144,13 +147,13 @@ router.post("/update",function(req,res,next){
  */
 router.get("/delete/:id",function(req,res){
     var id = req.params.id;
-    getData.connect("delete from book where id = " + id,function(result){ 
+    getData.query("delete from book where id = " + id,function(result){ 
       res.redirect("/");
     })
 });
 
 router.get('/categoryList', function(req, res, next) {//分类列表
-    getData.connect(userSQL.queryCategoryAll,function(result){
+    getData.query(userSQL.queryCategoryAll,function(err,result){
         res.render('index', {current:menuData.menu[0].name,
           message:"分类列表",
           menuList:menuData.menu,result:result});
@@ -158,7 +161,7 @@ router.get('/categoryList', function(req, res, next) {//分类列表
 });
 
 router.get('/publisherList', function(req, res, next) {//出版社列表
-    getData.connect(userSQL.queryPublisherList,function(result){ 
+    getData.query(userSQL.queryPublisherList,function(err,result){ 
         res.render('index', {current:menuData.menu[0].name,message:"出版列表",
             menuList:menuData.menu,
             result:result
